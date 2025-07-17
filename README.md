@@ -10,7 +10,6 @@ Bienvenue dans mon premier mini-jeu JavaScript : **Flappy Bird**, version simpli
 ## 🔗 Jouer maintenant
 
 👉 [Clique ici pour jouer en ligne](https://godwin-creator.github.io/flappybird-gwin/)  
-*Compatible desktop uniquement pour l’instant.*
 
 ---
 
