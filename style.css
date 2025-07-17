@@ -6,3 +6,25 @@ body {
     height: 100vh;
     margin: 0;
 }
+
+  body {
+    text-align: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  #start-screen {
+    margin-top: 100px;
+  }
+  #start-screen button {
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  #start-screen h1 {
+    font-size: 40px;
+    color: #333;
+  }

@@ -1,3 +1,8 @@
+function startGame() {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("zone_de_dessin").style.display = "block";
+    dessine(); // on lance le jeu ici
+}
 //Contexte graphique
 const cvs = document.getElementById("zone_de_dessin");
 cvs.width = 300;
@@ -149,4 +154,4 @@ function dessine(){
 
     }
 }
-dessine();
+// dessine(); ← maintenant c’est lancé par le bouton Start
