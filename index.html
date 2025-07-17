@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird - by Gwin</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flappy Bird - by Gwin</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="start-screen">
-      <h1>Flappy Bird</h1>
-      <button onclick="startGame()">Start</button>
-    </div>
+  <div id="start-screen">
+    <button id="dark-toggle" onclick="toggleDarkMode()">Mode Sombre</button>
+    <h1>Flappy Bird</h1>
+    <button id="start-btn" onclick="startGame()">Commencer</button>
+  </div>
 
-<canvas id="zone_de_dessin" style="display: none;"></canvas>
+  <canvas id="zone_de_dessin" style="display: none;"></canvas>
+
+  <script src="flappy.js"></script>
 </body>
-    <script src="flappy.js"></script>
 </html>

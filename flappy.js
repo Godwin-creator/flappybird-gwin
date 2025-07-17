@@ -1,157 +1,145 @@
-function startGame() {
-    document.getElementById("start-screen").style.display = "none";
-    document.getElementById("zone_de_dessin").style.display = "block";
-    dessine(); // on lance le jeu ici
-}
-//Contexte graphique
+// === Initialisation du canvas ===
 const cvs = document.getElementById("zone_de_dessin");
 cvs.width = 300;
 cvs.height = 400;
 cvs.style.cursor = "pointer";
 const ctx = cvs.getContext("2d");
 
+// === Images ===
+const imageArrierePlan = new Image(); imageArrierePlan.src = "images/arrierePlan.png";
+const imageAvantPlan = new Image(); imageAvantPlan.src = "images/avantPlan.png";
+const imageOiseau1 = new Image(); imageOiseau1.src = "images/oiseau1.png";
+const imageOiseau2 = new Image(); imageOiseau2.src = "images/oiseau2.png";
+const imageTuyauBas = new Image(); imageTuyauBas.src = "images/tuyauBas.png";
+const imageTuyauHaut = new Image(); imageTuyauHaut.src = "images/tuyauHaut.png";
 
-//Images
-const imageArrierePlan = new Image();
-imageArrierePlan.src = "images/arrierePlan.png";
+// === Sons ===
+const sonVole = new Audio("sons/sonVole.mp3");
+const sonScore = new Audio("sons/sonScore.mp3");
+const sonChoc = new Audio("sons/sonChoc.mp3");
 
-const imageAvantPlan = new Image();
-imageAvantPlan.src = "images/avantPlan.png";
-
-const imageOiseau1 = new Image();
-imageOiseau1.src = "images/oiseau1.png";
-
-const imageOiseau2 = new Image();
-imageOiseau2.src = "images/oiseau2.png";
-
-const imageTuyauBas = new Image();
-imageTuyauBas.src = "images/tuyauBas.png";
-
-const imageTuyauHaut = new Image();
-imageTuyauHaut.src = "images/tuyauHaut.png";
-
-
-//Les sons
-const sonVole = new Audio();
-sonVole.src = "sons/sonVole.mp3"
-
-const sonScore = new Audio();
-sonScore.src = "sons/sonScore.mp3"
-
-const sonChoc = new Audio();
-sonChoc.src = "sons/sonChoc.mp3"
-
-
-//Paramètres des tuyaux
+// === Paramètres du jeu ===
 const largeurTuyau = 40;
 const ecartTuyaux = 80;
+const largeurOiseau = 34;
+const hauteurOiseau = 24;
+const gravite = 1;
 
-let tabTuyaux = [];
-
-tabTuyaux[0] = {
-    x: cvs.width,
-    y: cvs.height - 150,
-}
-
-//Paramètre de l'oiseau
 let xoiseau = 100;
 let yoiseau = 150;
-const gravite = 1;
 let oiseauMonte = 0;
-const largeurOiseau =  34;
-const hauteurOiseau =  24;
 
-let finDuJeu = false;
+let tabTuyaux = [{ x: cvs.width, y: cvs.height - 150 }];
 let score = 0;
+let record = localStorage.getItem("record") || 0;
+let finDuJeu = false;
+let frame = 0;
 
-document.addEventListener("click", monte);
-function monte(){
-    if(finDuJeu === false){
-        oiseauMonte = 10 ;
-        yoiseau = yoiseau - 25;
-        sonVole.play();    
-    } else{
-       setTimeout(replay, 500);
+// === Événements ===
+document.addEventListener("click", () => {
+    if (!finDuJeu) {
+        oiseauMonte = 10;
+        yoiseau -= 25;
+        sonVole.play();
+    } else {
+        setTimeout(replay, 500);
     }
+});
+
+function replay() {
+    location.reload(); // recharge la page
 }
 
-//Pour recommencer le jeu
-function replay(){
-    finDuJeu = false;
-    //Le location permet de recharger la page
-    // Ainsi le score revient à 0.
-    location.reload();
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
 }
 
-//Dessin
-function dessine(){
+function startGame() {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("zone_de_dessin").style.display = "block";
+    dessine();
+}
+
+// === Boucle principale ===
+function dessine() {
     ctx.drawImage(imageArrierePlan, 0, 0);
-    //Gestion des tuyaux (leur passage)
-    for(let i=0; i<tabTuyaux.length; i++){
-        tabTuyaux[i].x --;
-        //Desin du tuyau
+
+    // Gestion des tuyaux
+    for (let i = 0; i < tabTuyaux.length; i++) {
+        tabTuyaux[i].x--;
+
         ctx.drawImage(imageTuyauBas, tabTuyaux[i].x, tabTuyaux[i].y);
-        ctx.drawImage(imageTuyauHaut, tabTuyaux[i].x, tabTuyaux[i].y - ecartTuyaux - imageTuyauHaut.height); 
-        if(tabTuyaux[i].x === 100){
+        ctx.drawImage(
+            imageTuyauHaut,
+            tabTuyaux[i].x,
+            tabTuyaux[i].y - ecartTuyaux - imageTuyauHaut.height
+        );
+
+        if (tabTuyaux[i].x === 100) {
             tabTuyaux.push({
                 x: cvs.width,
-                y: Math.floor(100 + Math.random()*180)            
+                y: Math.floor(100 + Math.random() * 180),
             });
-        } 
-        // Les tuyaux sont déjà passés se servent plus à 
-        // il va faloir les supprimer une fois sortis de la zone de dessin 
-        // tt en utilisant la fonction "splice" c'est une instruction
-        // qui à été vue quand on étudiais les tableaux.
-        else if(tabTuyaux[i].x + largeurTuyau < 0){
+        } else if (tabTuyaux[i].x + largeurTuyau < 0) {
             tabTuyaux.splice(i, 1);
         }
-        
-        //Gestion des collisions
-        if(yoiseau < 0 || yoiseau + hauteurOiseau > 300 || (xoiseau + largeurOiseau >= tabTuyaux[i].x && 
+
+        // Collision
+        const toucheTuyau =
+            xoiseau + largeurOiseau >= tabTuyaux[i].x &&
             xoiseau <= tabTuyaux[i].x + largeurTuyau &&
-            (yoiseau + hauteurOiseau >= tabTuyaux[i].y || yoiseau + ecartTuyaux <= tabTuyaux[i].y))){
-                sonChoc.play()
-                finDuJeu = true;
-            }
-        //Gestion du score
-        if(xoiseau === tabTuyaux[i].x + largeurTuyau + 5){
-            score++;
-            //Pour visualiser le score dans la console
-            console.log("SCORE = "+score)
-            sonScore.play()
+            (yoiseau + hauteurOiseau >= tabTuyaux[i].y ||
+                yoiseau + ecartTuyaux <= tabTuyaux[i].y);
+        const horsEcran = yoiseau < 0 || yoiseau + hauteurOiseau > 300;
+
+        if (toucheTuyau || horsEcran) {
+            sonChoc.play();
+            finDuJeu = true;
         }
 
+        // Score
+        if (xoiseau === tabTuyaux[i].x + largeurTuyau + 5) {
+            score++;
+            if (score > record) {
+                record = score;
+                localStorage.setItem("record", record);
+            }
+            sonScore.play();
+        }
     }
+
+    // Avant-plan
     ctx.drawImage(imageAvantPlan, 0, cvs.height - imageAvantPlan.height);
 
-    //Mouvement de l'oiseau
-    yoiseau = yoiseau + gravite; 
-    //Pourque l'oiseau batte les ailes.
-    if(oiseauMonte > 0){
-        oiseauMonte--
-        ctx.drawImage(imageOiseau2, xoiseau, yoiseau);
-    } else {
-        ctx.drawImage(imageOiseau1, xoiseau, yoiseau);
-    }
+    // Mouvement de l'oiseau
+    yoiseau += gravite;
+    frame++;
+
+    const imageOiseauActuel = frame % 20 < 10 ? imageOiseau1 : imageOiseau2;
+    ctx.drawImage(imageOiseauActuel, xoiseau, yoiseau);
+
+    // Cadre du jeu
     ctx.lineWidth = 3;
     ctx.strokeRect(0, 0, cvs.width, cvs.height);
-    
-    ctx.fillStyle = "green"
-    ctx.font = "20px Verdana"
-    ctx.fillText("Score : "+score, 10, cvs.height - 20)
 
-    if(finDuJeu === false){
-    requestAnimationFrame(dessine);
+    // Scores
+    ctx.fillStyle = "green";
+    ctx.font = "18px Verdana";
+    ctx.fillText("Score : " + score, 10, cvs.height - 40);
+    ctx.fillText("Record : " + record, 10, cvs.height - 15);
+
+    // Fin de jeu
+    if (!finDuJeu) {
+        requestAnimationFrame(dessine);
     } else {
-        ctx.fillStyle = "red"
-        ctx.font = "40px Verdana"
-        ctx.fillText("GAME OVER", 30, 200)    
-
-        //Pour recommencer le jeu
-        ctx.fillStyle = "chocolate"
-        ctx.font = "20px Verdana"
-        ctx.fillText("Clic to replay", 80, 230)    
-
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        ctx.fillRect(0, 0, cvs.width, cvs.height);
+        ctx.fillStyle = "white";
+        ctx.font = "30px Verdana";
+        ctx.fillText("GAME OVER", 60, 180);
+        ctx.font = "18px Verdana";
+        ctx.fillText("Score : " + score, 100, 210);
+        ctx.fillText("Record : " + record, 95, 240);
+        ctx.fillText("Clique pour rejouer", 70, 270);
     }
 }
-// dessine(); ← maintenant c’est lancé par le bouton Start
