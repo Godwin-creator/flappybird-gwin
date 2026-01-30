@@ -154,7 +154,7 @@ cd flappybird-gwin
 💡 Passionné par le développement web, l'intelligence artificielle et les projets créatifs
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/komi-godwin-edoh-bedi-449166339)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Godwin-creator)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/komi-godwin-edoh)
 
 </div>
 
