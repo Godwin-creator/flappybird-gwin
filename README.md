@@ -114,7 +114,7 @@ flappybird-gwin/
 ### Option 1 : Jouer en ligne
 Cliquez simplement sur le badge ci-dessous pour jouer immédiatement :
 
-[![Jouer](https://img.shields.io/badge/🎮_JOUER_MAINTENANT-4CAF50?style=for-the-badge)](https://godwin-creator.github.io/flappybird-gwin/)
+[![Jouer](https://img.shields.io/badge/🎮_JOUER_MAINTENANT-4CAF50?style=for-the-badge)](https://komi-godwin-edoh.github.io/flappybird-gwin/)
 
 ### Option 2 : Installation locale
 
