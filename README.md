@@ -4,10 +4,10 @@
 
 ### *Un voyage dans l'apprentissage du JavaScript à travers un classique du jeu mobile*
 
-[![Jouer maintenant](https://img.shields.io/badge/🎮_Jouer_maintenant-brightgreen?style=for-the-badge)](https://komi-godwin-edoh.github.io/flappybird-gwin/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow?style=flat-square&logo=javascript)](https://github.com/komi-godwin-edoh/flappybird-gwin)
-[![HTML5](https://img.shields.io/badge/HTML5-Canvas-orange?style=flat-square&logo=html5)](https://github.com/komi-godwin-edoh/flappybird-gwin)
-[![CSS3](https://img.shields.io/badge/CSS3-Styling-blue?style=flat-square&logo=css3)](https://github.com/komi-godwin-edoh/flappybird-gwin)
+[![Jouer maintenant](https://img.shields.io/badge/🎮_Jouer_maintenant-brightgreen?style=for-the-badge)](https://Godwin-creator.github.io/flappybird-gwin/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow?style=flat-square&logo=javascript)](https://github.com/Godwin-creator/flappybird-gwin)
+[![HTML5](https://img.shields.io/badge/HTML5-Canvas-orange?style=flat-square&logo=html5)](https://github.com/Godwin-creator/flappybird-gwin)
+[![CSS3](https://img.shields.io/badge/CSS3-Styling-blue?style=flat-square&logo=css3)](https://github.com/Godwin-creator/flappybird-gwin)
 
 </div>
 
@@ -114,7 +114,7 @@ flappybird-gwin/
 ### Option 1 : Jouer en ligne
 Cliquez simplement sur le badge ci-dessous pour jouer immédiatement :
 
-[![Jouer](https://img.shields.io/badge/🎮_JOUER_MAINTENANT-4CAF50?style=for-the-badge)](https://komi-godwin-edoh.github.io/flappybird-gwin/)
+[![Jouer](https://img.shields.io/badge/🎮_JOUER_MAINTENANT-4CAF50?style=for-the-badge)](https://Godwin-creator.github.io/flappybird-gwin/)
 
 ### Option 2 : Installation locale
 
@@ -153,8 +153,8 @@ cd flappybird-gwin
 
 💡 Passionné par le développement web, l'intelligence artificielle et les projets créatifs
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/komi-godwin-edoh-bedi-449166339)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/komi-godwin-edoh)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/Godwin-creator-bedi-449166339)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Godwin-creator)
 
 </div>
 
